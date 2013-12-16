@@ -52,7 +52,7 @@ Template.meetingStartStop.helpers({
   },
   
   "costBySeconds": function () {
-    return Session.get('cost');
+    return Session.get('cost').toFixed(2);
   }
 });
 
