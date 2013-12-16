@@ -1,21 +1,21 @@
 console.log('collections/meeting.js');
 
-Meeting = new Meteor.Collection('meeting');
+Meeting = new Meteor.Collection('Meeting');
 
 var checkDbRights = function funcCheckRights (userId, ownerId) {
   return userId === ownerId;
 };
 
 var DbAuthorization = {
-  update: function funcUpdMember(userId, doc) {
+  "update": function funcUpdMember(userId, doc) {
     return checkDbRights(userId, doc.ownerId);
   },
   
-  remove: function funcDelMember(userId, doc) {
+  "remove": function funcDelMember(userId, doc) {
     return checkDbRights(userId, doc.ownerId);
   },
   
-  insert: function funcAddMember(userId, doc) {
+  "insert": function funcAddMember(userId, doc) {
     return !! userId;
   }
 };
@@ -23,9 +23,9 @@ var DbAuthorization = {
 Meeting.allow(DbAuthorization);
 
 Meteor.methods({
-  createMeeting: function(meetingAttributes) {
+  "createMeeting": function(meetingAttributes) {
     var user = Meteor.user(),
-        meetingWithSameSubject = Meeting.findOne({title: meetingAttributes.title});
+        meetingWithSameSubject = Meeting.findOne({"title": meetingAttributes.title});
     // ensure the user is logged in
     if (!user)
       throw new Meteor.Error(401, "You need to login to create a new meeting");
@@ -40,8 +40,8 @@ Meteor.methods({
     }
     
     var meeting = {
-      title: meetingAttributes.title + (this.isSimulation ? ' *' : ''),
-      ownerId: user._id
+      "title": meetingAttributes.title + (this.isSimulation ? ' *' : ''), // test to prove simulation
+      "ownerId": user._id
     };
     
     // MaJ du champ cote client
@@ -60,7 +60,7 @@ Meteor.methods({
   
   addMemberToMeeting: function(meetingId, memberAttributes) {
     var user = Meteor.user(),
-        meeting = Meeting.findOne({_id: meetingId}),
+        meeting = Meeting.findOne({"_id": meetingId}),
         salary = parseInt(memberAttributes.salary);
     // ensure the user is logged in
     if (!user)
@@ -82,11 +82,11 @@ Meteor.methods({
     }
     
     var member = {
-      email: memberAttributes.email + (this.isSimulation ? ' (new)' : ''),
-      salary: parseInt(memberAttributes.salary)
+      "email": memberAttributes.email + (this.isSimulation ? ' (new)' : ''),
+      "salary": parseInt(memberAttributes.salary)
     };
     
-    var meetingId = Meeting.update({_id: meeting._id}, {$push: {members: member}});
+    var meetingId = Meeting.update({"_id": meeting._id}, {"$push": {"members": member}});
     return meetingId;
   }
 });

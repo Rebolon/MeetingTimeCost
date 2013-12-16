@@ -3,7 +3,10 @@ console.log('client/main.js');
 Meteor.startup(function () {
   Session.setDefault('selectedMeeting', null);
   Session.setDefault('selectedSprint', null);
-  Session.setDefault('currentRoom', null);
+  
+  Deps.autorun(function () {
+    Meteor.subscribe("Meeting", Session.get("selectedMeeting"));
+  });
   
   (function logRenders () {
     _.each(Template, function (template, name) {

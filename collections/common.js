@@ -8,15 +8,15 @@ var checkDbRights = function funcCheckRights (userId, ownerId) {
 };
 
 var DbAuthorization = {
-  update: function funcUpdMember(userId, doc) {
+  "update": function funcUpdMember(userId, doc) {
     return checkDbRights(userId, doc.ownerId);
   },
   
-  remove: function funcDelMember(userId, doc) {
+  "remove": function funcDelMember(userId, doc) {
     return checkDbRights(userId, doc.ownerId);
   },
   
-  insert: function funcAddMember(userId, doc) {
+  "insert": function funcAddMember(userId, doc) {
     return !! userId;
   }
 };
