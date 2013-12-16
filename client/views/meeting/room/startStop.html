@@ -1,0 +1,20 @@
+<template name="meetingStartStop">
+  {{#with meeting}}
+  <div class="row">
+    <button class="btn btn-success" id="btnStartMeeting" {{#if startTime}}disabled="disabled"{{/if}}>Démarrer</button>
+    <button class="btn btn-danger" id="btnEndMeeting" {{#if endTime}}disabled="disabled"{{/if}}>Arrêter</button>
+  </div>
+  
+  <div class="row" id="rowChrono">
+    <div class="alert alert-info">
+      <strong>Chrono:</strong> <span id="timeCounter" class="counter counter-analog">{{getPendingTimer}}</span>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="alert alert-info">
+      <strong>Coût:</strong> <span id="costCounter">{{costBySeconds}}</span>
+    </div>
+  </div>
+  {{/with}}
+</template>

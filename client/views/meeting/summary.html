@@ -1,27 +1,33 @@
 <template name="meetingSummary">
-    {{#with meeting}}
-	{{title}} ({{submitted}})
-	<ul>
-	{{#each members}}
-		<li>{{email}} {{#unless email}}inconnue{{/unless}} (daily cost: {{salary}})</li>
-	{{/each}}
-	</ul>
-	{{#if endTime}}
-	# de participants: {{members.length}}<br />
-		d&eacute;marrage de la r&eacute;union: {{displayDate startTime}}<br />
-	        fin de la r&eacute;union: {{displayDate endTime}}<br />
-		dur&eacute;e: {{getDuration}}<br />
-		cout: {{getCost}} &euro;<br />
-	{{else}}
-		{{#if startTime}}
-			R&eacute;union en cours<br />
-		{{else}}
-			R&eacute;union non d&eacute;marr&eacute;e<br />
-		{{/if}}
-	{{/if}}
-    {{/with}}
-
-    {{#unless meeting}}
-	Il semble qu'aucune r&eacute;union soit s&eacute;lectionn&eacute;e
-    {{/unless}}
+  <div class="row">
+    <div class="col-md-12">
+      {{#with meeting}}
+      <h2>{{title}} <i>{{submitted}}</i></h2>
+      {{#if endTime}}
+      <div class="row"><div class="col-md-2"><strong># de participants:</strong> </div><div class="col-md-2">{{members.length}}</div></div>
+      <div class="row">
+        <ul>
+          {{#each members}}
+          <li>{{email}} {{#unless email}}inconnue{{/unless}} (daily cost: {{salary}})</li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="row"><div class="col-md-2"><strong>démarrage de la réunion:</strong> </div><div class="col-md-2">{{displayDate startTime}}</div></div>
+      <div class="row"><div class="col-md-2"><strong>fin de la réunion:</strong> </div><div class="col-md-2">{{displayDate endTime}}</div></div>
+      <div class="row"><div class="col-md-2"><strong>durée:</strong> </div><div class="col-md-2">{{getDuration}}</div></div>
+      <div class="row"><div class="col-md-2"><strong>cout:</strong> </div><div class="col-md-2">{{getCost}} &euro;</div></div>
+      {{else}}
+      {{#if startTime}}
+      <div class="row"><div class="col-md-4"><strong>Réunion en cours</strong></div></div>
+      {{else}}
+        <div class="row"><div class="col-md-4"><strong>Réunion non démarrée</strong></div></div>
+      {{/if}}
+      {{/if}}
+      {{/with}}
+      
+      {{#unless meeting}}
+      Il semble qu'aucune réunion soit sélectionnée
+      {{/unless}}
+    </div>
+  </div>
 </template>

@@ -3,6 +3,10 @@ html, body {
     height: 100%;
 }
 
+body {
+  padding-top: 50px;
+}
+
 #wrap {
     min-height: 100%;
     height: auto !important;
@@ -11,5 +15,9 @@ html, body {
 }
 
 #wrap > .container {
-    padding-top: 60px;
+    padding-top: 25px;
+}
+
+#meetingUserMessage, #rowChrono {
+  margin-top: 10px;
 }

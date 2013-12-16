@@ -1,0 +1,10 @@
+<template name="meetingItem">
+  <li>
+    <a href=""><span class="glyphicon glyphicon-remove-circle"></span></a> 
+    {{#unless startTime}}
+    <a href="/meeting/edit/{{_id}}"><span class="glyphicon glyphicon-edit"></span></a>
+    {{/unless}}
+    <a href="/meeting/summary/{{_id}}"><span class="glyphicon glyphicon-zoom-in"></span> {{title}}</a>
+    {{#if endTime}}(finished){{/if}}{{#unless endTime}}{{#if startTime}}(pending){{/if}}{{/unless}}
+  </li>
+</template>
