@@ -1,16 +1,21 @@
 Template.meetingSummary.helpers({
-	meeting: function() {
+  "submitted": function () {
+    var submitDate = new Date(this.submitted);
+    return submitDate.toLocaleDateString() + ' ' + submitDate.toLocaleTimeString();
+  },
+  
+	"meeting": function() {
 		var id = Session.get('selectedMeeting');
 		if (id) {
 			return Meeting.findOne(id);
 		}
 	},
 
-	displayDate: function(dateToDisplay) {
+	"displayDate": function(dateToDisplay) {
 		return (dateToDisplay ? dateToDisplay.toLocaleString() : null);
 	},
 
-	getDuration: function() {
+	"getDuration": function() {
 		var id = Session.get('selectedMeeting'),
 		    meeting = Meeting.findOne(id),
 		    duration = (new MeetingTimeCost.Duration).getDuration(meeting),
@@ -20,13 +25,15 @@ Template.meetingSummary.helpers({
 			hours = duration.getHours().toString();
 			minutes = duration.getMinutes().toString();
 			seconds = duration.getSeconds().toString();
-			return (hours.length === 2?'':'0') + hours + ':' + (minutes.length === 2?'':'0') + minutes + ':' + (seconds.length === 2?'':'0') + seconds;
+			return ('0' + hours).substr(-2) + ':' 
+            + ('0' + minutes).substr(-2) + ':' 
+            + ('0' + seconds).substr(-2);
 		}
 	},
 
-	getCost: function() {
+	"getCost": function() {
 		var id = Session.get('selectedMeeting'),
-                    meeting = Meeting.findOne(id),
+        meeting = Meeting.findOne(id),
 		    cost = (new MeetingTimeCost.Meeting).getCost(meeting),
 		    intVal = parseInt(cost);
 

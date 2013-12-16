@@ -1,0 +1,47 @@
+<template name="meetingSubmit">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="input-group">
+        <input type="text" id="title" class="form-control" placeholder="Meeting Subject" value="{{selected.title}}" />
+        <span class="input-group-btn">
+          {{#if selected}}
+          <input type="button" id="btnEditMeeting" class="btn" value="Modifier" />
+          {{else}}
+          <input type="button" id="btnAddMeeting" class="btn" value="Creer" />
+          {{/if}}
+        </span>
+      </div>
+    </div>
+    
+    <div class="col-md-3">
+      <div class="form-group">
+        <input type="email" id="email" class="form-control" placeholder="Email" />
+      </div>
+      <div class="form-group">
+        <input type="number" id="salary" class="form-control" placeholder="Daily Cost" step="50"  />
+      </div>
+      <span class="form-group">
+        <input type="button" id="btnAddMember" class="btn" value="Ajouter"/>
+      </span>
+    </div>
+    
+    <div class="col-md-3">
+      {{> meetingMemberList}}
+    </div>
+    
+    <div class="">
+      {{#if selected}}
+      <button id="btnGotoSummary" class="btn">Continue</button>
+      {{/if}}
+      
+      {{#unless selected}}
+      Create the meeting to continue.
+      {{/unless}}
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12" id="meetingUserMessage">
+    </div>
+  </div>
+</template>

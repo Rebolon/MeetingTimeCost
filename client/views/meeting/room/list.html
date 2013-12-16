@@ -1,12 +1,12 @@
-<template name="sprintList">
-  <ul>{{#unless sprints.count}}
-    Aucun Sprint
+<template name="meetingList">
+  <ul>{{#unless meetings.count}}
+    Aucune réunion
     {{/unless}}
     
-    <div id="alertRemoveSprint" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="alertRemoveMeeting" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h3 id="myModalLabel">Suppression du Sprint</h3>
+        <h3 id="myModalLabel">Suppression de la réunion</h3>
       </div>
       <div class="modal-body">
         
@@ -17,8 +17,8 @@
       </div>
     </div>
     
-    {{#each sprints}}
-    {{> sprintItem}}
+    {{#each meetings}}
+    {{> meetingItem}}
     {{/each}}
   </ul>
 </template>
